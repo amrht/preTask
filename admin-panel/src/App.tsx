@@ -20,7 +20,7 @@ export default function App() {
           element={
             <RequireAuth>
               <Sidebar />
-              <main className="flex-1 p-6 bg-gray-100">
+              <main className="flex-1 p-6 pb-8 md:min-h-[100vh] min-h-[110vh] bg-gray-100 md:pt-2 pt-16">
                 <Routes>
                   <Route path="/" element={<Home />} />
                   <Route path="/artist" element={<ArtistsPage />} />
