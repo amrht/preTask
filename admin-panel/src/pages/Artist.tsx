@@ -53,7 +53,7 @@ export default function ArtistsPage() {
   const fetchArtists = async () => {
     try {
       setLoading(true);
-      const res = await axios.get('http://localhost:5000/api/artists', {
+      const res = await axios.get('https://pretask-production.up.railway.app/api/artists', {
         params: { search, genre: genreFilter, page, limit },
       });
       setArtists(res.data.artists);
@@ -77,7 +77,7 @@ export default function ArtistsPage() {
 
   const handleDelete = async (id: number) => {
     try {
-      await axios.delete(`http://localhost:5000/api/artists/${id}`);
+      await axios.delete(`https://pretask-production.up.railway.app/api/artists/${id}`);
       toast.success('Artist deleted successfully');
       fetchArtists();
     } catch (error) {
@@ -87,7 +87,7 @@ export default function ArtistsPage() {
 
   const handleBatchDelete = async () => {
     try {
-      await axios.post('http://localhost:5000/api/artists/batch-delete', { ids: selectedIds });
+      await axios.post('https://pretask-production.up.railway.app/api/artists/batch-delete', { ids: selectedIds });
       setSelectedIds([]);
       toast.success('Selected artists deleted successfully');
       fetchArtists();
@@ -107,12 +107,12 @@ if (imageFile) {
 }
 
 if (isEdit) {
-  await axios.put(`http://localhost:5000/api/artists/${form.id}`, formData, {
+  await axios.put(`https://pretask-production.up.railway.app/api/artists/${form.id}`, formData, {
     headers: { 'Content-Type': 'multipart/form-data' },
   });
   toast.success('Artist updated successfully');
 } else {
-  await axios.post('http://localhost:5000/api/artists', formData, {
+  await axios.post('https://pretask-production.up.railway.app/api/artists', formData, {
     headers: { 'Content-Type': 'multipart/form-data' },
   });
   toast.success('Artist created successfully');
@@ -235,7 +235,7 @@ setImageFile(null);
         <TableCell>{artist.bio}</TableCell>
         <TableCell>
   {artist.image_url ? (
-    <img src={`http://localhost:5000${artist.image_url}`} alt={artist.name} className="h-12 w-12 object-cover rounded" />
+    <img src={`https://pretask-production.up.railway.app${artist.image_url}`} alt={artist.name} className="h-12 w-12 object-cover rounded" />
   ) : (
     <span>No Image</span>
   )}
@@ -252,7 +252,7 @@ setImageFile(null);
                               <DropdownMenuItem onClick={() => handleDelete(artist.id)}>
                                 <Trash2Icon className="mr-2 h-4 w-4" /> Delete
                               </DropdownMenuItem>
-                              <DropdownMenuItem onClick={() => window.open(`http://localhost:5000/${artist.image_url}`, '_blank')}>
+                              <DropdownMenuItem onClick={() => window.open(`https://pretask-production.up.railway.app/${artist.image_url}`, '_blank')}>
                                 <DownloadIcon className="mr-2 h-4 w-4" /> Download
                               </DropdownMenuItem>
                             </DropdownMenuContent>

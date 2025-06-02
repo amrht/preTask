@@ -21,8 +21,7 @@ export function formatToISTTimeAgo(utcDateString: string): string {
   const utcDate = new Date(utcDateString);
 
   // Convert to IST (UTC+5:30)
-  const istOffsetMs = 5.5 * 60 * 60 * 1000; // 5 hours 30 minutes
-  const istDate = new Date(utcDate.getTime() + istOffsetMs);
+  const istDate = new Date(utcDate.getTime());
 
   // Format as "x minutes ago"
   return format(istDate);
@@ -44,9 +43,9 @@ export default function Home() {
         setLoading(true);
 
         const [artistsRes, contentsRes, usersRes] = await Promise.all([
-          axios.get("http://localhost:5000/api/artists"),
-          axios.get("http://localhost:5000/api/contents"),
-          axios.get("http://localhost:5000/api/users"),
+          axios.get("https://pretask-production.up.railway.app/api/artists"),
+          axios.get("https://pretask-production.up.railway.app/api/contents"),
+          axios.get("https://pretask-production.up.railway.app/api/users"),
         ]);
 
         setTotalArtists(artistsRes.data.total);
@@ -65,9 +64,8 @@ export default function Home() {
   useEffect(() => {
     async function fetchLogs() {
       try {
-        const res = await axios.get(`http://localhost:5000/api/logs?limit=${logLimit}`);
+        const res = await axios.get(`https://pretask-production.up.railway.app/api/logs?limit=${logLimit}`);
         setLogs(res.data);
-        console.log(res.data);
       } catch (err) {
         console.error("Failed to fetch logs", err);
       }

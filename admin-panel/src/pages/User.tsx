@@ -30,8 +30,7 @@ export default function UsersPage() {
 
   const fetchUsers = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/api/users');
-      console.log(res.data)
+      const res = await axios.get('https://pretask-production.up.railway.app/api/users');
       setUsers(res.data.users);
     } catch (error) {
       toast.error('Failed to fetch users');
@@ -45,10 +44,10 @@ export default function UsersPage() {
   const handleSave = async () => {
     try {
       if (isEdit) {
-        await axios.put(`http://localhost:5000/api/users/${form.id}`, form);
+        await axios.put(`https://pretask-production.up.railway.app/api/users/${form.id}`, form);
         toast.success('User updated');
       } else {
-        await axios.post('http://localhost:5000/api/users', form);
+        await axios.post('https://pretask-production.up.railway.app/api/users', form);
         toast.success('User created');
       }
       setForm({ id: 0, name: '', email: '', role: 'editor' });
@@ -62,7 +61,7 @@ export default function UsersPage() {
 
   const handleDelete = async (id: number) => {
     try {
-      await axios.delete(`http://localhost:5000/api/users/${id}`);
+      await axios.delete(`https://pretask-production.up.railway.app/api/users/${id}`);
       toast.success('User deleted');
       fetchUsers();
     } catch {
@@ -73,7 +72,7 @@ export default function UsersPage() {
   const toggleBan = async (user: User) => {
   try {
     // Spread all user fields, overwrite is_active with negation
-    await axios.put(`http://localhost:5000/api/users/${user.id}`, {
+    await axios.put(`https://pretask-production.up.railway.app/api/users/${user.id}`, {
       ...user,
       is_active: !user.is_active,
     });

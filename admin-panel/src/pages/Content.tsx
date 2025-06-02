@@ -47,7 +47,7 @@ export default function ContentsPage() {
   const fetchContents = async () => {
     try {
       setLoading(true);
-      const res = await axios.get('http://localhost:5000/api/contents', {
+      const res = await axios.get('https://pretask-production.up.railway.app/api/contents', {
         params: { search, type: typeFilter, page, limit },
       });
       setContents(res.data.contents);
@@ -61,7 +61,7 @@ export default function ContentsPage() {
 
   const fetchArtists = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/api/artists');
+      const res = await axios.get('https://pretask-production.up.railway.app/api/artists');
       setArtists(res.data.artists ?? res.data);
     } catch (error) {
       console.error('Failed to fetch artists', error);
@@ -78,7 +78,7 @@ export default function ContentsPage() {
 
   const handleDelete = async (id: number) => {
     try {
-      await axios.delete(`http://localhost:5000/api/contents/${id}`);
+      await axios.delete(`https://pretask-production.up.railway.app/api/contents/${id}`);
       toast.success('Deleted successfully');
       fetchContents();
     } catch (err) {
@@ -88,7 +88,7 @@ export default function ContentsPage() {
 
   const handleBatchDelete = async () => {
     try {
-      await axios.post('http://localhost:5000/api/contents/batch-delete', {
+      await axios.post('https://pretask-production.up.railway.app/api/contents/batch-delete', {
         ids: selectedIds,
       });
       toast.success('Selected contents deleted');
@@ -108,10 +108,10 @@ export default function ContentsPage() {
       if (form.file) formData.append('file', form.file);
 
       if (isEdit) {
-        await axios.put(`http://localhost:5000/api/contents/${form.id}`, formData);
+        await axios.put(`https://pretask-production.up.railway.app/api/contents/${form.id}`, formData);
         toast.success('Updated successfully');
       } else {
-        await axios.post('http://localhost:5000/api/contents', formData);
+        await axios.post('https://pretask-production.up.railway.app/api/contents', formData);
         toast.success('Created successfully');
       }
 
@@ -273,7 +273,7 @@ export default function ContentsPage() {
                       <DropdownMenuItem onClick={() => handleDelete(content.id)}>
                         <Trash2Icon className="mr-2 h-4 w-4" /> Delete
                       </DropdownMenuItem>
-                      <DropdownMenuItem onClick={() => window.open(`http://localhost:5000/${content.file_url}`, '_blank')}>
+                      <DropdownMenuItem onClick={() => window.open(`https://pretask-production.up.railway.app/${content.file_url}`, '_blank')}>
                         <DownloadIcon className="mr-2 h-4 w-4" /> Download
                       </DropdownMenuItem>
                     </DropdownMenuContent>

@@ -33,7 +33,7 @@ export default function Login() {
 
   const handleCredentialResponse = async (response: any) => {
     try {
-      const res = await fetch("http://localhost:5000/api/users/auth", {
+      const res = await fetch("https://pretask-production.up.railway.app/api/users/auth", {
         method: "POST",
         headers: {
           Authorization: `Bearer ${response.credential}`,
