@@ -1,7 +1,3 @@
-Here's a polished English documentation file based on everything you've shared:
-
----
-
 # 📄 Project Documentation
 
 ## ✅ Status
